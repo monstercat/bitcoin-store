@@ -1,0 +1,56 @@
+
+body {
+  padding: 0 0 0 20px;
+  font: 14px/1.231 "Lato", sans-serif;
+  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+}
+
+a {
+  color: #00B7FF;
+}
+
+@grid: 256px;
+
+.player {
+  height: 250px;
+  overflow: scroll;
+}
+
+.art {
+  background-repeat: no-repeat;
+  background-size: @grid @grid;
+}
+
+.cell {
+  width: @grid;
+  height: @grid;
+}
+
+.container {
+  margin-top: 40px;
+}
+
+.title {
+  font-weight: 100;
+  margin-top: 16px;
+}
+
+.btn-cb {
+  margin: 5px 0 0 5px;
+}
+
+.bitcoin-logo {
+  background-image: url('img/bitcoin.png');
+  background-repeat: no-repeat;
+}
+
+//.flip {
+//  width: @grid;
+//  height: @grid;
+//  position: absolute;
+//  float: none;
+//  z-index: 200;
+//  top: 0;
+//  left: 0;
+//  -webkit-transition: all .1s ease-out;
+//}

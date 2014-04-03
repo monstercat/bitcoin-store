@@ -1,0 +1,60 @@
+extends layout
+
+- var album_collection =;
+
+mixin coinbase_button(code, customId)
+  a.coinbase-button(data-code=code, data-custom=customId, data-button-style='custom_large', href='https://coinbase.com/checkouts/#{code}') Pay With Bitcoin
+
+block content
+  - var albs = albums.reverse();
+  - var enc = encodeURIComponent;
+  - var art_root = "https://s3.amazonaws.com/data.monstercat.com/labels/monstercat/art/thumb/";
+  .container
+    a(id="albums")
+    .row
+      .col-md-2
+        img(src="img/mcat_bitcoin_256.png", height="128px")
+      .col-md-7
+        h1.title Monstercat's Bitcoin Store
+        p
+          :markdown
+            Buy any Monstercat album for only **$4.99** with Bitcoin. Buy **all** of our
+            albums show here for only **$29.99**!
+    .row
+      h2 Info
+      p
+        :markdown
+          * A valid email address is required to receive the albums.
+          * Please email [bitcoin@monstercat.com](mailto:bitcoin@monstercat.com) with your order number if you are having any issues.
+    .row
+      h2 Buy them all!
+      b.price $29.99
+      br
+      +coinbase_button("6b1dcecc4977cb900d4fef80e91ea46f", "bf_album_collection")
+    .row
+      for album in albs
+        span(style="width: 128px")
+          a(href="##{album.number}")
+            img(src=art_root + "256/" + enc(album.art), width="128px", height="128px")
+    for album in albs
+      a(id=album.number)
+      .row
+        h2= album.title
+        a(href="#albums") Top
+        br
+        b.price= "$" + album.coinbase.price
+      .row
+        .col-md-3
+          .cell.art
+            img(src=art_root + "512/" + enc(album.art), width="256px", height="256px")
+        .col-md-6
+          .player(data-url=album.sc, data-title=album.title)
+            button.btn.btn-default.btn-lg
+              span.glyphicon.glyphicon-play
+              |  Listen
+              //a(href=album.sc, class="sc-player")
+      .row
+        .col-md-3
+          .btn-cb
+            +coinbase_button(album.coinbase.id, album.coinbase.customId)
+
